@@ -1114,6 +1114,10 @@ article header .author {
 article header .postdate {
   display: inline;
 }
+article .content {
+  margin-bottom: 10rem;
+/* http://webdesignerwall.com/tutorials/css-elastic-videos */
+}
 article .content h2:before {
   position: absolute;
   top: -4px;
