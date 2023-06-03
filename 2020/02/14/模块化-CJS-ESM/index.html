@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="模块化: CommonJS 和 ESModule基本使用CommonJS 1234&#x2F;&#x2F; 导入const axios &#x3D; require(&quot;axios&quot;);&#x2F;&#x2F; 导出module.exports &#x3D; exports &#x3D; axios ESModule 12345678910111213&#x2F;&#x2F; 一般导出导入&#x2F;&#x2F; 导出export request;&#x2F;&#x2F; 导入import &amp;#123; r">
+    <meta name="description" content="模块化: CommonJS 和 ES Modules基本使用CommonJS 1234&#x2F;&#x2F; 导入const axios &#x3D; require(&quot;axios&quot;);&#x2F;&#x2F; 导出module.exports &#x3D; exports &#x3D; axios ESModule 12345678910111213&#x2F;&#x2F; 一般导出导入&#x2F;&#x2F; 导出export request;&#x2F;&#x2F; 导入import &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模块化:CJS &amp; ESM">
 <meta property="og:url" content="https://lingo09.github.io/2020/02/14/%E6%A8%A1%E5%9D%97%E5%8C%96-CJS-ESM/">
 <meta property="og:site_name" content="09&#39;s Blog">
-<meta property="og:description" content="模块化: CommonJS 和 ESModule基本使用CommonJS 1234&#x2F;&#x2F; 导入const axios &#x3D; require(&quot;axios&quot;);&#x2F;&#x2F; 导出module.exports &#x3D; exports &#x3D; axios ESModule 12345678910111213&#x2F;&#x2F; 一般导出导入&#x2F;&#x2F; 导出export request;&#x2F;&#x2F; 导入import &amp;#123; r">
+<meta property="og:description" content="模块化: CommonJS 和 ES Modules基本使用CommonJS 1234&#x2F;&#x2F; 导入const axios &#x3D; require(&quot;axios&quot;);&#x2F;&#x2F; 导出module.exports &#x3D; exports &#x3D; axios ESModule 12345678910111213&#x2F;&#x2F; 一般导出导入&#x2F;&#x2F; 导出export request;&#x2F;&#x2F; 导入import &amp;#123;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-02T14:16:25.477Z">
+<meta property="article:modified_time" content="2023-06-03T03:05:32.258Z">
 <meta property="article:author" content="Lingo_09">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="Node.js">
@@ -114,7 +114,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS-%E5%92%8C-ESModule"><span class="toc-number">1.</span> <span class="toc-text">模块化: CommonJS 和 ESModule</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">基本使用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS-%E5%92%8C-ES-Modules"><span class="toc-number">1.</span> <span class="toc-text">模块化: CommonJS 和 ES Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS"><span class="toc-number">1.2.</span> <span class="toc-text">CommonJS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-Modules"><span class="toc-number">1.3.</span> <span class="toc-text">ES Modules</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -158,10 +158,26 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h1 id="模块化-CommonJS-和-ESModule"><a href="#模块化-CommonJS-和-ESModule" class="headerlink" title="模块化: CommonJS 和 ESModule"></a>模块化: CommonJS 和 ESModule</h1><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p><strong>CommonJS</strong></p>
+    <h1 id="模块化-CommonJS-和-ES-Modules"><a href="#模块化-CommonJS-和-ES-Modules" class="headerlink" title="模块化: CommonJS 和 ES Modules"></a>模块化: CommonJS 和 ES Modules</h1><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p><strong>CommonJS</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入</span></span><br><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">&quot;axios&quot;</span>);</span><br><span class="line"><span class="comment">// 导出</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="built_in">exports</span> = axios</span><br></pre></td></tr></table></figure>
 <p><strong>ESModule</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般导出导入</span></span><br><span class="line"><span class="comment">// 导出</span></span><br><span class="line"><span class="keyword">export</span> request;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入</span></span><br><span class="line"><span class="keyword">import</span> &#123; request &#125; <span class="keyword">from</span> <span class="string">&#x27;./request&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认导出导入</span></span><br><span class="line"><span class="comment">// 导出</span></span><br><span class="line"><span class="built_in">exports</span> <span class="keyword">default</span> request;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入</span></span><br><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">&#x27;./request&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><blockquote>
+<p>模块导入是动态的，模块在运行时被加载和执行。</p>
+</blockquote>
+<p><strong>module.exports &amp; exports</strong><br>CJS模块导出的是对值的浅拷贝，导入是一次性的，如果导出的值是基本数据类型，在导入模块中被修改不会影响到原始模块；相反，在导出模块中定时修改值，导入模块中也不会有变化。</p>
+<p><strong>moduleA.js:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  value = <span class="number">6</span>;</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = value;</span><br></pre></td></tr></table></figure>
+
+<p><strong>moduleB.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> importedValue = <span class="built_in">require</span>(<span class="string">&#x27;./moduleA.js&#x27;</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(importedValue); <span class="comment">// 输出: 5</span></span><br><span class="line">&#125;, <span class="number">4000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>而如果导出的是一个引用类型数据，比如对象，数组<br>通过修改对象或者数组中的属性值，可以影响到原模块中的数据</p>
+<h2 id="ES-Modules"><a href="#ES-Modules" class="headerlink" title="ES Modules"></a>ES Modules</h2><p>ES Modules是ECMAScript标准（ES6）中引入的官方模块化系统，用于在浏览器端和现代JavaScript环境中使用。</p>
+<p>每个文件都被视为一个模块，并且模块的导出和导入是静态的，在解析阶段就确定了模块的依赖关系；因此 ESM 比 CJS 好做 tree-shaking。</p>
+<p>因为静态导入，import不能放在条件语句中，只能放在文件开头。如果想要在代码块中动态引入，可以通过import()函数或者dynamic import语法动态地导入模块。</p>
+<p>ES Modules的导入是基于引用的，模块的导入值是被绑定的，导入的值是实时连接的，如果导出的值在导入模块中被修改，会影响到原始模块。</p>
+
   </div>
   <script src="https://giscus.app/client.js"
         data-repo="lingo09/blog-discussions"
@@ -202,7 +218,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS-%E5%92%8C-ESModule"><span class="toc-number">1.</span> <span class="toc-text">模块化: CommonJS 和 ESModule</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">基本使用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS-%E5%92%8C-ES-Modules"><span class="toc-number">1.</span> <span class="toc-text">模块化: CommonJS 和 ES Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS"><span class="toc-number">1.2.</span> <span class="toc-text">CommonJS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-Modules"><span class="toc-number">1.3.</span> <span class="toc-text">ES Modules</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
