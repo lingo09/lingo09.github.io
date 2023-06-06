@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="TCP三次握手过程">
+    <meta name="description" content="TCP三次握手TCP三次握手TCP（传输控制协议）是一种面向连接的协议，它在通信的开始阶段使用三次握手来建立可靠的连接。三次握手是为了确保双方的通信端点（客户端和服务器）都能够正常地发送和接收数据。 以下是TCP三次握手的过程：  第一次握手（SYN）： 客户端向服务器发送一个带有SYN（同步）标志的连接请求报文段。 这表示客户端希望建立连接，并指定了初始序列号（用于后续的数据传输）。   第二次">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP三次握手">
 <meta property="og:url" content="https://lingo09.github.io/2020/06/25/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
 <meta property="og:site_name" content="09&#39;s Blog">
-<meta property="og:description" content="TCP三次握手过程">
+<meta property="og:description" content="TCP三次握手TCP三次握手TCP（传输控制协议）是一种面向连接的协议，它在通信的开始阶段使用三次握手来建立可靠的连接。三次握手是为了确保双方的通信端点（客户端和服务器）都能够正常地发送和接收数据。 以下是TCP三次握手的过程：  第一次握手（SYN）： 客户端向服务器发送一个带有SYN（同步）标志的连接请求报文段。 这表示客户端希望建立连接，并指定了初始序列号（用于后续的数据传输）。   第二次">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-02T15:43:03.466Z">
+<meta property="article:modified_time" content="2023-06-06T12:41:55.623Z">
 <meta property="article:author" content="Lingo_09">
 <meta property="article:tag" content="TCP">
 <meta property="article:tag" content="http">
@@ -83,6 +83,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2020/10/01/promise-generator-async-await/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/2020/05/01/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -112,7 +114,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">TCP三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">过程</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">TCP三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B-1"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">TCP三次握手</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -156,7 +158,29 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h1 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h1><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2>
+    <h1 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h1><h4 id="TCP三次握手-1"><a href="#TCP三次握手-1" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h4><p>TCP（传输控制协议）是一种面向连接的协议，它在通信的开始阶段使用三次握手来建立可靠的连接。三次握手是为了确保双方的通信端点（客户端和服务器）都能够正常地发送和接收数据。</p>
+<p>以下是TCP三次握手的过程：</p>
+<ol>
+<li>第一次握手（SYN）：<ul>
+<li>客户端向服务器发送一个带有SYN（同步）标志的连接请求报文段。</li>
+<li>这表示客户端希望建立连接，并指定了初始序列号（用于后续的数据传输）。</li>
+</ul>
+</li>
+<li>第二次握手（SYN + ACK）：<ul>
+<li>服务器收到客户端的连接请求后，会向客户端发送一个带有SYN和ACK（确认）标志的报文段。</li>
+<li>这表示服务器已收到请求，并同意建立连接，同时也为后续数据传输指定了自己的初始序列号。</li>
+</ul>
+</li>
+<li>第三次握手（ACK）：<ul>
+<li>客户端收到服务器的确认后，会向服务器发送一个带有ACK标志的报文段。</li>
+<li>这个报文段是对服务器的响应，确认服务器的确认，表示连接建立成功。</li>
+<li>服务器接收到客户端的确认后，连接正式建立。</li>
+</ul>
+</li>
+</ol>
+<p>通过这个三次握手过程，客户端和服务器都确认了彼此的能力和愿望建立连接。双方都知道对方的初始序列号，并且同意进行后续的数据传输。握手过程中的序列号用于确保数据的可靠传输和顺序传递。</p>
+<p>需要注意的是，三次握手是TCP建立连接的基本过程，它提供了一种双向的认可机制，确保双方都同意建立连接。这种机制有助于处理网络中的不确定性和数据丢失的情况，从而确保可靠的通信。</p>
+
   </div>
   <script src="https://giscus.app/client.js"
         data-repo="lingo09/blog-discussions"
@@ -197,7 +221,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">TCP三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">过程</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">TCP三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B-1"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">TCP三次握手</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="PromisePromise 解决了什么问题为什么Promise更优秀Generator 迭代器的进化从Symbol.iterator说起async&#x2F;await 更简洁的异步编程方式Promise和Generator的结合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise &amp; Generator &amp; async&#x2F;await">
+<meta property="og:url" content="https://lingo09.github.io/2020/10/01/promise-generator-async-await/">
+<meta property="og:site_name" content="09&#39;s Blog">
+<meta property="og:description" content="PromisePromise 解决了什么问题为什么Promise更优秀Generator 迭代器的进化从Symbol.iterator说起async&#x2F;await 更简洁的异步编程方式Promise和Generator的结合">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-03T06:30:14.748Z">
+<meta property="article:author" content="Lingo_09">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Promise &amp; Generator &amp; async/await</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2020/06/25/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://lingo09.github.io/2020/10/01/promise-generator-async-await/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&text=Promise &amp; Generator &amp; async/await"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&is_video=false&description=Promise &amp; Generator &amp; async/await"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Promise &amp; Generator &amp; async/await&body=Check out this article: https://lingo09.github.io/2020/10/01/promise-generator-async-await/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&name=Promise &amp; Generator &amp; async/await&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&t=Promise &amp; Generator &amp; async/await"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Promise"><span class="toc-number">1.</span> <span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">Promise 解决了什么问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88Promise%E6%9B%B4%E4%BC%98%E7%A7%80"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">为什么Promise更优秀</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generator-%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E8%BF%9B%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">Generator 迭代器的进化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8ESymbol-iterator%E8%AF%B4%E8%B5%B7"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">从Symbol.iterator说起</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async-x2F-await-%E6%9B%B4%E7%AE%80%E6%B4%81%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">async&#x2F;await 更简洁的异步编程方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise%E5%92%8CGenerator%E7%9A%84%E7%BB%93%E5%90%88"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">Promise和Generator的结合</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Promise &amp; Generator &amp; async/await
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lingo_09</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-09-30T16:00:00.000Z" class="dt-published" itemprop="datePublished">2020-10-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ES6/" rel="tag">ES6</a>, <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="Promise-解决了什么问题"><a href="#Promise-解决了什么问题" class="headerlink" title="Promise 解决了什么问题"></a>Promise 解决了什么问题</h2><h4 id="为什么Promise更优秀"><a href="#为什么Promise更优秀" class="headerlink" title="为什么Promise更优秀"></a>为什么Promise更优秀</h4><h2 id="Generator-迭代器的进化"><a href="#Generator-迭代器的进化" class="headerlink" title="Generator 迭代器的进化"></a>Generator 迭代器的进化</h2><h4 id="从Symbol-iterator说起"><a href="#从Symbol-iterator说起" class="headerlink" title="从Symbol.iterator说起"></a>从Symbol.iterator说起</h4><h2 id="async-x2F-await-更简洁的异步编程方式"><a href="#async-x2F-await-更简洁的异步编程方式" class="headerlink" title="async&#x2F;await 更简洁的异步编程方式"></a>async&#x2F;await 更简洁的异步编程方式</h2><h4 id="Promise和Generator的结合"><a href="#Promise和Generator的结合" class="headerlink" title="Promise和Generator的结合"></a>Promise和Generator的结合</h4>
+  </div>
+  <script src="https://giscus.app/client.js"
+        data-repo="lingo09/blog-discussions"
+        data-repo-id="R_kgDOJqyXWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJqyXW84CW7V2"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Promise"><span class="toc-number">1.</span> <span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">Promise 解决了什么问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88Promise%E6%9B%B4%E4%BC%98%E7%A7%80"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">为什么Promise更优秀</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generator-%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E8%BF%9B%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">Generator 迭代器的进化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8ESymbol-iterator%E8%AF%B4%E8%B5%B7"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">从Symbol.iterator说起</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async-x2F-await-%E6%9B%B4%E7%AE%80%E6%B4%81%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">async&#x2F;await 更简洁的异步编程方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise%E5%92%8CGenerator%E7%9A%84%E7%BB%93%E5%90%88"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">Promise和Generator的结合</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://lingo09.github.io/2020/10/01/promise-generator-async-await/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&text=Promise &amp; Generator &amp; async/await"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&is_video=false&description=Promise &amp; Generator &amp; async/await"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Promise &amp; Generator &amp; async/await&body=Check out this article: https://lingo09.github.io/2020/10/01/promise-generator-async-await/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&title=Promise &amp; Generator &amp; async/await"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&name=Promise &amp; Generator &amp; async/await&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://lingo09.github.io/2020/10/01/promise-generator-async-await/&t=Promise &amp; Generator &amp; async/await"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Lingo_09
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
